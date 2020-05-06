@@ -48,8 +48,6 @@ Here's an example for the above-used Entry case class:
 
 ```scala
 import eu.seitzal.http4s_upickle.{UPickleEntityDecoder, UPickleEntityEncoder}
-import org.http4s._
-import org.http4s.dsl.io._
 import cats.effect.IO
 
 case class Entry(text: String, done: Boolean, priority: Option[Int])
