@@ -25,7 +25,7 @@ ivy"eu.seitzal::http4s-upickle:0.1.0"      // Mill
 Use the following import to bring the implicits into scope:
 
 ```scala
-import eu.seitzal.http4s_upickle
+import eu.seitzal.http4s_upickle._
 ```
 
 You can then use any types that are readable/writable by uPickle as if they were internally supported by http4s.
