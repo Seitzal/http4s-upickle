@@ -1,4 +1,4 @@
-package eu.seitzal.http4s.upickle_interop
+package eu.seitzal.http4s_upickle
 
 import org.http4s._
 import org.http4s.headers._
@@ -20,7 +20,7 @@ final class UPickleEntityEncoder[F[_], A: Writer]
     Entity(Stream(write(a)).through(utf8Encode))
 
   override def headers = 
-    Headers(
+    Headers.of(
       `Content-Type`(
         MediaType.application.json,
         Charset.`UTF-8`))

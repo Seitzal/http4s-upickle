@@ -1,4 +1,4 @@
-package eu.seitzal.http4s
+package eu.seitzal
 
 import upickle.default.{Writer, Reader}
 import org.http4s.{EntityEncoder, EntityDecoder}
@@ -9,7 +9,7 @@ import cats.MonadError
  * implicit instances of [[org.http4s.EntityEncoder]] and 
  * [[org.http4s.EntityDecoder]].
  */
-package object upickle_interop {
+package object http4s_upickle {
 
   /** Spawns an [[org.http4s.EntityEncoder]] for any uPickle-writable type */
   implicit def uPickleEntityEncoder[F[_], A: Writer]: EntityEncoder[F, A] =

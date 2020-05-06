@@ -1,4 +1,4 @@
-package eu.seitzal.http4s.upickle_interop
+package eu.seitzal.http4s_upickle
 
 import org.http4s._
 import cats.MonadError

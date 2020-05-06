@@ -6,7 +6,7 @@ object interop extends ScalaModule with PublishModule {
   
   def artifactName = "http4s-upickle"
 
-  def publishVersion = "0.1.0"
+  def publishVersion = "0.2.0"
 
   def pomSettings = PomSettings(
     description = "Interoperability module for http4s and uPickle",
@@ -19,10 +19,19 @@ object interop extends ScalaModule with PublishModule {
     )
   )
 
-  def scalaVersion = "2.13.1"
+  def scalaVersion = "2.13.2"
 
   def ivyDeps = Agg(
-    ivy"org.http4s::http4s-core:0.21.2",
-    ivy"com.lihaoyi::upickle:0.9.5"
+    ivy"org.http4s::http4s-core:0.21.3",
+    ivy"com.lihaoyi::upickle:1.1.0"
   )
+
+  def scalacOptions = Seq("-deprecation")
+
+  object test extends Tests {
+    def ivyDeps = Agg(
+      ivy"org.scalatest::scalatest:3.1.1",
+      ivy"org.http4s::http4s-dsl:0.21.3")
+    def testFrameworks = Seq("org.scalatest.tools.Framework")
+  }
 }
