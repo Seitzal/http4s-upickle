@@ -6,9 +6,9 @@ Interoperability module for [http4s](https://github.com/http4s/http4s) and [uPic
 Declare an ivy dependency in your build tool or REPL:
 
 ```scala
-"eu.seitzal" %% "http4s-upickle" % "0.2.0" // SBT
-ivy"eu.seitzal::http4s-upickle:0.2.0"      // Mill
-$ivy.`eu.seitzal::http4s-upickle:0.2.0`    // Ammonite
+"eu.seitzal" %% "http4s-upickle" % "0.2.1" // SBT
+ivy"eu.seitzal::http4s-upickle:0.2.1"      // Mill
+$ivy.`eu.seitzal::http4s-upickle:0.2.1`    // Ammonite
 ```
 
 ## Usage
@@ -43,11 +43,11 @@ def writeEntry(entry: Entry): IO[Response[IO]] =
 
 ### Usage for specific types only
 
-Currently, using the wildcard import overrides http4s's built-in decoders and encoders for uPickle-compatible types, such as strings. This means that things such as string responses will receive "Content-type: application/json" headers. To avoid this behaviour and only use the module for specific types, such as your own case classes, you can define your own implicits rather than using the wildcard. 
+Currently, using the wildcard import overrides http4s's built-in decoders and encoders for uPickle-compatible types, such as strings. This means that things such as string responses will receive "Content-type: application/json" headers. To avoid this behaviour and only use the module for specific types, such as your own case classes, you can define your own implicit codec rather than using the wildcard.
 Here's an example for the above-used Entry case class:
 
 ```scala
-import eu.seitzal.http4s_upickle.{UPickleEntityDecoder, UPickleEntityEncoder}
+import eu.seitzal.http4s_upickle.UPickleEntityCodec
 import cats.effect.IO
 
 case class Entry(text: String, done: Boolean, priority: Option[Int])
@@ -55,7 +55,6 @@ case class Entry(text: String, done: Boolean, priority: Option[Int])
 object Entry {
   // Defining these in the companion object causes them to always be in implicit scope
   implicit val rw = upickle.default.macroRW[Entry]
-  implicit val ed = new UPickleEntityDecoder[IO, Entry]
-  implicit val ee = new UPickleEntityEncoder[IO, Entry]
+  implicit val ec = new UPickleEntityCodec[IO, Entry] // Combined EntityEncoder and -Decoder
 }
 ```
