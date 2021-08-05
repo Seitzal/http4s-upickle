@@ -31,11 +31,11 @@ final class Tests extends AnyFunSuite {
     val response: IO[Response[IO]] = Ok(myTodo)
     val responseBodyText = new String(
       response
-        .unsafeRunSync
+        .unsafeRunSync()
         .body
         .compile
         .toVector
-        .unsafeRunSync
+        .unsafeRunSync()
         .toArray
       )
     assert(responseBodyText == myTodoJson)
@@ -44,14 +44,14 @@ final class Tests extends AnyFunSuite {
   test("Reading json request body") {
     val request: Request[IO] = 
       new Request(body = Stream.emits(myTodoJson.getBytes))
-    assert(request.as[Todo].unsafeRunSync == myTodo)
+    assert(request.as[Todo].unsafeRunSync() == myTodo)
   }
 
   test("Read failure: Invalid json") {
     val request: Request[IO] = 
       new Request(body = Stream.emits("THIS_IS_NOT_VALID_JSON".getBytes))
     assertThrows[InvalidMessageBodyFailure] {
-      request.as[Todo].unsafeRunSync
+      request.as[Todo].unsafeRunSync()
     }
   }
 
@@ -59,7 +59,7 @@ final class Tests extends AnyFunSuite {
     val request: Request[IO] = 
       new Request(body = Stream.emits(myTodoJson.getBytes))
     assertThrows[MalformedMessageBodyFailure] {
-      request.as[Entry].unsafeRunSync
+      request.as[Entry].unsafeRunSync()
     }
   }
 
