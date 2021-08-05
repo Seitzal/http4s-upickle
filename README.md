@@ -16,8 +16,8 @@ mill interop.publishLocal
 Afterwards, you can set a dependency in your own project:
 
 ```scala
-ivy"eu.seitzal::http4s-upickle:0.1.0"      // Mill
-"eu.seitzal" %% "http4s-upickle" % "0.1.0" // SBT
+ivy"eu.seitzal::http4s-upickle:0.2.2"      // Mill
+"eu.seitzal" %% "http4s-upickle" % "0.2.2" // SBT
 ```
 
 ## Usage
