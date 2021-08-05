@@ -6,7 +6,7 @@ object interop extends ScalaModule with PublishModule {
   
   def artifactName = "http4s-upickle"
 
-  def publishVersion = "0.2.1"
+  def publishVersion = "0.2.2"
 
   def pomSettings = PomSettings(
     description = "Interoperability module for http4s and uPickle",
